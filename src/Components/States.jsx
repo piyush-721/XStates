@@ -46,7 +46,7 @@ export default function States() {
     };
     getData();
   }, []);
-  console.log(countries);
+//   console.log(countries);
   
 
   useEffect(() => {
