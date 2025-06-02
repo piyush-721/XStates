@@ -15,7 +15,7 @@ export default function States() {
     if (!country) return;
     try {
       const res = await axios.get(`${BACKEND_ENDPOINT}/country=${country}/states`);
-      setStates(res.data); 
+      setStates(res.data);
       setSelectedState("");
       setCities([]);
       setSelectedCity("");
@@ -29,7 +29,7 @@ export default function States() {
     if (!country || !state) return;
     try {
       const res = await axios.get(`${BACKEND_ENDPOINT}/country=${country}/state=${state}/cities`);
-      setCities(res.data); 
+      setCities(res.data);
       setSelectedCity("");
     } catch (e) {
       console.error(e);
@@ -41,21 +41,13 @@ export default function States() {
     const getData = async () => {
       const data = await fetchCountries();
       if (data && Array.isArray(data)) {
-        const trimmed = data.map((name) => name.trim()).filter(Boolean);
-        const seen = new Set();
-        const unique = trimmed.filter((name) => {
-          const lower = name.toLowerCase();
-          if (seen.has(lower)) return false;
-          seen.add(lower);
-          return true;
-        });
-        setCountries(unique);
-        
-    }
+        setCountries(data);
+      }
     };
     getData();
-    }, []);
-    console.log(countries);
+  }, []);
+  console.log(countries);
+  
 
   useEffect(() => {
     if (selectedCountry) {
@@ -90,8 +82,8 @@ export default function States() {
           style={{ width: 200, padding: 8 }}
         >
           <option value="" disabled>Select Country</option>
-          {countries.map((country) => (
-            <option key={country} value={country}>
+          {countries.map((country, index) => (
+            <option key={`${country}-${index}`} value={country}>
               {country}
             </option>
           ))}
@@ -106,8 +98,8 @@ export default function States() {
           style={{ width: 200, padding: 8 }}
         >
           <option value="" disabled>Select State</option>
-          {states.map((state) => (
-            <option key={state} value={state}>
+          {states.map((state, index) => (
+            <option key={`${state}-${index}`} value={state}>
               {state}
             </option>
           ))}
@@ -122,8 +114,8 @@ export default function States() {
           style={{ width: 200, padding: 8 }}
         >
           <option value="" disabled>Select City</option>
-          {cities.map((city) => (
-            <option key={city} value={city}>
+          {cities.map((city, index) => (
+            <option key={`${city}-${index}`} value={city}>
               {city}
             </option>
           ))}
