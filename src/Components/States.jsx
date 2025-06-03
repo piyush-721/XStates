@@ -76,7 +76,7 @@ export default function States() {
       <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
         {/* Country Dropdown */}
         <select
-          key={selectedCountry || "country"}
+          key={selectedCountry}
           value={selectedCountry}
           onChange={(e) => setSelectedCountry(e.target.value)}
           style={{ width: 200, padding: 8 }}
@@ -91,7 +91,7 @@ export default function States() {
 
         {/* State Dropdown */}
         <select
-          key={selectedState || "state"}
+          key={selectedState}
           value={selectedState}
           onChange={(e) => setSelectedState(e.target.value)}
           disabled={!selectedCountry}
@@ -107,7 +107,7 @@ export default function States() {
 
         {/* City Dropdown */}
         <select
-          key={selectedCity || "city"}
+          key={selectedCity}
           value={selectedCity}
           onChange={(e) => setSelectedCity(e.target.value)}
           disabled={!selectedState}
